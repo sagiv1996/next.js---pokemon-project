@@ -1,7 +1,10 @@
-import { List, ListItem } from "@mui/material";
+import { IconButton, List, ListItem } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroller";
+import LaunchIcon from "@mui/icons-material/Launch";
+import Link from "next/link";
+import Layout from "@/Layout";
 
 type Result = {
   name: string;
@@ -38,20 +41,39 @@ export default function Index() {
   if (!data) return <p>No Loading data data</p>;
 
   return (
-    <InfiniteScroll
-      loadMore={getData}
-      hasMore={hasMore}
-      loader={
-        <div className="loader" key={0}>
-          Loading ...
-        </div>
-      }
-    >
-      {data?.map((result, index) => (
-        <List key={index}>
-          <ListItem>{result.name}</ListItem>
+    <Layout>
+      <InfiniteScroll
+        loadMore={getData}
+        hasMore={hasMore}
+        loader={
+          <div className="loader" key={0}>
+            Loading ...
+          </div>
+        }
+      >
+        <List>
+          {data?.map((result, index) => (
+            <ListItem
+              key={index}
+              disableGutters
+              alignItems="center"
+              divider
+              secondaryAction={
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  component={Link}
+                  href="/dashboard"
+                >
+                  <LaunchIcon />
+                </IconButton>
+              }
+            >
+              {result.name}
+            </ListItem>
+          ))}
         </List>
-      ))}
-    </InfiniteScroll>
+      </InfiniteScroll>
+    </Layout>
   );
 }
