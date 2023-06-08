@@ -1,8 +1,9 @@
-import { IconButton, Link, List, ListItem } from "@mui/material";
+import { IconButton, Link, List, ListItem, Typography } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { GetServerSideProps } from "next";
 import Layout from "@/Layout";
 import axiosInstance from "@/axiosInstance";
+import { useRouter } from "next/router";
 
 type Result = {
   name: string;
@@ -18,6 +19,9 @@ type Result = {
 export default ({ data }: { data: Result }) => {
   return (
     <Layout>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Type: {data.name} ({data.pokemon.length})
+      </Typography>
       <List>
         {data.pokemon?.map((result, index) => (
           <ListItem
