@@ -1,4 +1,10 @@
-import { IconButton, List, ListItem, Typography } from "@mui/material";
+import {
+  IconButton,
+  LinearProgress,
+  List,
+  ListItem,
+  Typography,
+} from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroller";
@@ -48,7 +54,7 @@ export default () => {
       setHasMore(data ? response.count > data.length : false);
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p>Loaing...</p>;
   if (!data) return <p>No Loading data data</p>;
 
   return (
@@ -72,7 +78,7 @@ export default () => {
         hasMore={hasMore}
         loader={
           <div className="loader" key={0}>
-            Loading ...
+            <LinearProgress />
           </div>
         }
       >
