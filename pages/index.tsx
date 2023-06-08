@@ -24,11 +24,6 @@ export default () => {
     getData();
   }, []);
 
-  const getUrl = (url: string) => {
-    const pokemonId = new URL(url).pathname.split("/").filter(Boolean).pop();
-    return `/pokemon/${pokemonId}`;
-  };
-
   const getData = async () => {
     const { data: response, status } = await axios.get(endpointUrl);
     if (!response.results || status != 200) return;
@@ -69,7 +64,7 @@ export default () => {
                   edge="end"
                   aria-label="delete"
                   component={Link}
-                  href={getUrl(result.url)}
+                  href={`/pokemon/${result.name}`}
                 >
                   <LaunchIcon />
                 </IconButton>
