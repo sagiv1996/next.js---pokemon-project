@@ -1,14 +1,9 @@
 import Layout from "@/Layout";
 import PokemonCard from "@/components/PokemonCard";
+import axios from "axios";
 import { GetServerSideProps } from "next";
 
-async function fetchData(id: string) {
-  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-  const data = await response.json();
-  return data;
-}
-
-const IdPage = ({ data }: { data: any }) => {
+const NamePage = ({ data }: { data: any }) => {
   return (
     <Layout>
       <div
@@ -25,11 +20,11 @@ const IdPage = ({ data }: { data: any }) => {
   );
 };
 
-export default IdPage;
+export default NamePage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.query;
-  const data = await fetchData(id as string);
+  const { name } = context.query;
+  const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
 
   return {
     props: {
