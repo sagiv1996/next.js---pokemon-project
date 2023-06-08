@@ -20,8 +20,13 @@ type Result = {
 export default ({ data }: { data: Result }) => {
   return (
     <Layout>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Type: {data.name}{" "}
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        style={{ position: "fixed", top: 0, zIndex: 1, background: "#fff" }}
+      >
+        Type: {data.name}
         <CountUp end={data.pokemon.length} prefix="(" suffix=")" />
       </Typography>
       <List>
