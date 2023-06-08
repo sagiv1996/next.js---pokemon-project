@@ -1,5 +1,13 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Chip,
+  Typography,
+} from "@mui/material";
+import { useRouter } from "next/router";
 
 interface Pokemon {
   name: string;
@@ -12,6 +20,11 @@ interface Pokemon {
       };
     };
   };
+  types: {
+    type: {
+      name: string;
+    };
+  }[];
 }
 
 interface PokemonCardProps {
@@ -19,6 +32,12 @@ interface PokemonCardProps {
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
+  const router = useRouter();
+
+  const handleBackClick = () => {
+    router.back();
+  };
+
   return (
     <Card sx={{ maxWidth: 600 }}>
       <CardMedia
@@ -37,6 +56,18 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
         <Typography variant="body2" color="text.secondary">
           Width: {pokemon.weight}
         </Typography>
+        <div style={{ display: "flex", gap: "0.5rem", marginTop: "0.5rem" }}>
+          {pokemon.types.map((type, index) => (
+            <Chip key={index} label={type.type.name} />
+          ))}
+        </div>
+        <Button
+          variant="outlined"
+          onClick={handleBackClick}
+          sx={{ marginTop: "1rem" }}
+        >
+          Back
+        </Button>
       </CardContent>
     </Card>
   );
