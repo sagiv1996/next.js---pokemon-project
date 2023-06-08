@@ -1,3 +1,4 @@
+import Layout from "@/Layout";
 import PokemonCard from "@/components/PokemonCard";
 import { GetServerSideProps } from "next";
 
@@ -9,16 +10,18 @@ async function fetchData(id: string) {
 
 const IdPage = ({ data }: { data: any }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      {data && <PokemonCard pokemon={data} />}
-    </div>
+    <Layout>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "50vh",
+        }}
+      >
+        {<PokemonCard pokemon={data} />}
+      </div>
+    </Layout>
   );
 };
 

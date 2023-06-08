@@ -3,6 +3,7 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import axios from "axios";
 
 import { GetServerSideProps } from "next";
+import Layout from "@/Layout";
 
 type Result = {
   name: string;
@@ -17,28 +18,30 @@ type Result = {
 
 export default ({ data }: { data: Result }) => {
   return (
-    <List>
-      {data.pokemon?.map((result, index) => (
-        <ListItem
-          key={index}
-          disableGutters
-          alignItems="center"
-          divider
-          secondaryAction={
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              component={Link}
-              href={`/pokemon/${result.pokemon.name}`}
-            >
-              <LaunchIcon />
-            </IconButton>
-          }
-        >
-          {result.pokemon.name}
-        </ListItem>
-      ))}
-    </List>
+    <Layout>
+      <List>
+        {data.pokemon?.map((result, index) => (
+          <ListItem
+            key={index}
+            disableGutters
+            alignItems="center"
+            divider
+            secondaryAction={
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                component={Link}
+                href={`/pokemon/${result.pokemon.name}`}
+              >
+                <LaunchIcon />
+              </IconButton>
+            }
+          >
+            {result.pokemon.name}
+          </ListItem>
+        ))}
+      </List>
+    </Layout>
   );
 };
 

@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface Ability {
   ability: {
@@ -65,7 +66,9 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
         </Typography>
         <div style={{ display: "flex", gap: "0.5rem", marginTop: "0.5rem" }}>
           {pokemon.types.map((type, index) => (
-            <Chip key={index} label={type.type.name} />
+            <Link href={`/type/${type.type.name}`}>
+              <Chip key={index} label={type.type.name} />
+            </Link>
           ))}
         </div>
         <Typography variant="body2" color="text.secondary">
