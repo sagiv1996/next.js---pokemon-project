@@ -5,13 +5,14 @@ import InfiniteScroll from "react-infinite-scroller";
 import LaunchIcon from "@mui/icons-material/Launch";
 import Link from "next/link";
 import Layout from "@/Layout";
+import { url } from "inspector";
 
 type Result = {
   name: string;
   url: string;
 };
 
-export default function Index() {
+export default () => {
   const [data, setData] = useState<Result[]>();
   const [isLoading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -22,6 +23,11 @@ export default function Index() {
   useEffect(() => {
     getData();
   }, []);
+
+  const getUrl = (url: string) => {
+    const pokemonId = new URL(url).pathname.split("/").filter(Boolean).pop();
+    return `/pokemon/${pokemonId}`;
+  };
 
   const getData = async () => {
     const { data: response, status } = await axios.get(endpointUrl);
@@ -63,7 +69,7 @@ export default function Index() {
                   edge="end"
                   aria-label="delete"
                   component={Link}
-                  href="/dashboard"
+                  href={getUrl(result.url)}
                 >
                   <LaunchIcon />
                 </IconButton>
@@ -76,4 +82,4 @@ export default function Index() {
       </InfiniteScroll>
     </Layout>
   );
-}
+};
