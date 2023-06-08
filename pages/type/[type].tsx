@@ -3,7 +3,8 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import { GetServerSideProps } from "next";
 import Layout from "@/Layout";
 import axiosInstance from "@/axiosInstance";
-import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+const CountUp = dynamic(() => import("react-countup"), { ssr: false });
 
 type Result = {
   name: string;
@@ -20,7 +21,8 @@ export default ({ data }: { data: Result }) => {
   return (
     <Layout>
       <Typography variant="h4" component="h1" gutterBottom>
-        Type: {data.name} ({data.pokemon.length})
+        Type: {data.name}{" "}
+        <CountUp end={data.pokemon.length} prefix="(" suffix=")" />
       </Typography>
       <List>
         {data.pokemon?.map((result, index) => (
