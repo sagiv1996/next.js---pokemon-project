@@ -9,6 +9,12 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 
+interface Ability {
+  ability: {
+    name: string;
+  };
+}
+
 interface Pokemon {
   name: string;
   height: number;
@@ -25,6 +31,7 @@ interface Pokemon {
       name: string;
     };
   }[];
+  abilities: Ability[];
 }
 
 interface PokemonCardProps {
@@ -61,6 +68,12 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
             <Chip key={index} label={type.type.name} />
           ))}
         </div>
+        <Typography variant="body2" color="text.secondary">
+          Abilities:
+          {pokemon.abilities.map((ability, index) => (
+            <span key={index}> {ability.ability.name}</span>
+          ))}
+        </Typography>
         <Button
           variant="outlined"
           onClick={handleBackClick}
