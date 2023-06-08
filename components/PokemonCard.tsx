@@ -66,7 +66,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
         </Typography>
         <div style={{ display: "flex", gap: "0.5rem", marginTop: "0.5rem" }}>
           {pokemon.types.map((type, index) => (
-            <Link href={`/type/${type.type.name}`}>
+            <Link href={`/type/${type.type.name}`} key={index}>
               <Chip key={index} label={type.type.name} />
             </Link>
           ))}
