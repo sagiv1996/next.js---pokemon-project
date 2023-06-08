@@ -5,7 +5,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import LaunchIcon from "@mui/icons-material/Launch";
 import Link from "next/link";
 import Layout from "@/Layout";
-import { url } from "inspector";
+import axiosInstance from "@/axiosInstance";
 
 type Result = {
   name: string;
@@ -17,7 +17,7 @@ export default () => {
   const [isLoading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [endpointUrl, setEndpointUrl] = useState(
-    "https://pokeapi.co/api/v2/pokemon"
+    `${axiosInstance.defaults.baseURL}/pokemon`
   );
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import Layout from "@/Layout";
+import axiosInstance from "@/axiosInstance";
 import PokemonCard from "@/components/PokemonCard";
-import axios from "axios";
 import { GetServerSideProps } from "next";
 
 const NamePage = ({ data }: { data: any }) => {
@@ -24,7 +24,7 @@ export default NamePage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { name } = context.query;
-  const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+  const { data } = await axiosInstance.get(`/pokemon/${name}`);
 
   return {
     props: {

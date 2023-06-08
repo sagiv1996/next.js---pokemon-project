@@ -1,9 +1,8 @@
 import { IconButton, Link, List, ListItem } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
-import axios from "axios";
-
 import { GetServerSideProps } from "next";
 import Layout from "@/Layout";
+import axiosInstance from "@/axiosInstance";
 
 type Result = {
   name: string;
@@ -47,9 +46,8 @@ export default ({ data }: { data: Result }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { type } = context.query;
-  const { data } = await axios.get<Result>(
-    `https://pokeapi.co/api/v2/type/${type}`
-  );
+
+  const { data } = await axiosInstance.get<Result>(`/type/${type}`);
   return {
     props: {
       data,
